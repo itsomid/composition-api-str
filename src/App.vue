@@ -5,11 +5,16 @@
 </template>
 
 <script>
+// eslint-disable-next-line
+import { ref } from 'vue'
 export default {
-  data() {
-    return {
-      userName: 'Maximilian',
-    };
+  setup() {
+    
+    let uName = ref("OmidShabani");
+    setTimeout(function(){
+      uName.value = "omid"
+    },2000)
+    return { userName: uName };
   },
 };
 </script>
