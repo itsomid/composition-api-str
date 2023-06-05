@@ -2,30 +2,30 @@
   <section class="container">
     <h2>{{ user.name }}</h2>
     <h3>{{ user.age }}</h3>
+    <button @click="setAge">Set Age</button>
   </section>
 </template>
 
 <script>
 // eslint-disable-next-line
-import {  reactive, toRefs } from 'vue'
+import { ref, reactive } from 'vue'
 export default {
   setup() {
-
+    //use for single value
+    // eslint-disable-next-line
+    let age = ref(31)
+    
+    //use for object value
     let user = reactive({
       name: 'OmidShabani',
       age: 31
     });
-    const userRefs = toRefs(user)
 
-    console.log(user);
-    console.log(userRefs);
-    setTimeout(function(){
-      user.name = "omid"
-      user.age = 44
-    },2000)
+    function setNewData(){
+      user.age = 33
+    }
 
-
-    return { user: user };
+    return { user: user, setAge: setNewData };
   },
 };
 </script>
