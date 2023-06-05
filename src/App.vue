@@ -1,20 +1,31 @@
 <template>
   <section class="container">
-    <h2>{{ userName }}</h2>
+    <h2>{{ user.name }}</h2>
+    <h3>{{ user.age }}</h3>
   </section>
 </template>
 
 <script>
 // eslint-disable-next-line
-import { ref } from 'vue'
+import {  reactive, toRefs } from 'vue'
 export default {
   setup() {
-    
-    let uName = ref("OmidShabani");
+
+    let user = reactive({
+      name: 'OmidShabani',
+      age: 31
+    });
+    const userRefs = toRefs(user)
+
+    console.log(user);
+    console.log(userRefs);
     setTimeout(function(){
-      uName.value = "omid"
+      user.name = "omid"
+      user.age = 44
     },2000)
-    return { userName: uName };
+
+
+    return { user: user };
   },
 };
 </script>
