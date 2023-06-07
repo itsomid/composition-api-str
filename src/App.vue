@@ -1,47 +1,60 @@
 <template>
   <section class="container">
     <h2>{{ userName }}</h2>
-    <h3>{{ user.age }}</h3>
+    <h3>{{ age }}</h3>
     <button @click="setAge">Set Age</button>
     <div>
       <input type="text" placeholder="First Name" v-model="firstName" />
-      <input type="text" placeholder="Last Name" v-model="lastName" />
+      <input type="text" placeholder="Last Name" ref="lastNameInput" />
+      <button @click="setLastName">set last name</button>
     </div>
   </section>
 </template>
 
 <script>
-// eslint-disable-next-line
-import { ref, reactive, computed } from "vue";
+
+import { ref, reactive, computed ,watch } from "vue";
 export default {
   setup() {
     //use for single value
-    // eslint-disable-next-line
-    let age = ref(31);
-    const firstName = ref("Omid");
-    const lastName = ref("Shabani");
 
+    let uAge = ref(31);
+    const firstName = ref("Omid");
+    const lastName = ref('');
+    const lastNameInput = ref(null)
     //use for object value
-    let user = reactive({
-      name: "OmidShabani",
-      age: 31,
-    });
+    // let user = reactive({
+    //   name: "OmidShabani",
+    //   age: 31,
+    // });
 
     const userName = computed(function () {
       return firstName.value + " " + lastName.value;
     });
 
+    watch([uAge, userName],function(newValues, oldValues){
+      console.log(oldValues[0])
+      console.log(newValues[0])
+      console.log(oldValues[1])
+      console.log(newValues[1])
+    })
+
     function setNewData() {
-      user.age = 33;
+      uAge.value = 33;
     }
     
+    function setLastName(){
+      lastName.value = lastNameInput.value.value
+    }
 
     return {
-      user: user,
+      age: uAge,
       setAge: setNewData,
       userName,
       firstName,
       lastName,
+      lastNameInput,
+      setLastName
     };
   },
 };
