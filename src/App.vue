@@ -1,7 +1,6 @@
 <template>
   <section class="container">
-    <h2>{{ userName }}</h2>
-    <h3>{{ age }}</h3>
+    <user-data :first-name="firstName" :last-name="lastName" :age="age"></user-data>
     <button @click="setAge">Set Age</button>
     <div>
       <input type="text" placeholder="First Name" v-model="firstName" />
@@ -12,49 +11,45 @@
 </template>
 
 <script>
-
-import { ref, reactive, computed ,watch } from "vue";
+import { ref, watch } from "vue";
+import UserData from "./components/USerData.vue";
 export default {
+  components: {
+    UserData,
+  },
   setup() {
     //use for single value
 
     let uAge = ref(31);
     const firstName = ref("Omid");
-    const lastName = ref('');
-    const lastNameInput = ref(null)
+    const lastName = ref("");
+    const lastNameInput = ref(null);
     //use for object value
     // let user = reactive({
     //   name: "OmidShabani",
     //   age: 31,
     // });
 
-    const userName = computed(function () {
-      return firstName.value + " " + lastName.value;
+    watch([uAge], function (newValues, oldValues) {
+      console.log(oldValues[0]);
+      console.log(newValues[0]);
     });
-
-    watch([uAge, userName],function(newValues, oldValues){
-      console.log(oldValues[0])
-      console.log(newValues[0])
-      console.log(oldValues[1])
-      console.log(newValues[1])
-    })
 
     function setNewData() {
       uAge.value = 33;
     }
-    
-    function setLastName(){
-      lastName.value = lastNameInput.value.value
+
+    function setLastName() {
+      lastName.value = lastNameInput.value.value;
     }
 
     return {
       age: uAge,
       setAge: setNewData,
-      userName,
       firstName,
       lastName,
       lastNameInput,
-      setLastName
+      setLastName,
     };
   },
 };
