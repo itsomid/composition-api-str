@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import { ref, watch, provide, toRef } from "vue";
+import { ref, watch, provide,reactive } from "vue";
 import UserData from "./components/USerData.vue";
 export default {
   components: {
@@ -24,7 +24,7 @@ export default {
     const fName = ref("omidd")
     const lastNameInput = ref(null);
 
-    const userData = ref({
+    const userData = reactive({
       firstName: fName,
       lastName: "Shabani",
       age: 30
@@ -50,7 +50,7 @@ export default {
     }
 
     const setLastName = () => {
-      userData.value.lastName = lastNameInput.value.value;
+      userData.lastName = lastNameInput.value.value;
     };
 
     return {

@@ -3,17 +3,17 @@
   <h3>{{ age }}</h3>
 </template>
 <script>
-import { computed, inject,onBeforeUpdate } from "vue";
+import { computed, inject } from "vue";
 export default {
   setup() {
   
     const userData = inject('userData')
 
     const userName = computed(function(){
-        return userData.value.firstName + ' ' + userData.value.lastName
+        return userData.firstName + ' ' + userData.lastName
     })
     const age = computed(function(){
-        return userData.value.age
+        return userData.age
     })
     // const age = inject('userAge')
     // const firstName = inject('firstName')
